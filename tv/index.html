@@ -1,106 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TV</title>
-
-  <!-- Evita zoom, barras y comportamientos móviles -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-      cursor: none; /* Modo TV */
+    html, body { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; }
+    #overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.75);
+      display:flex; align-items:center; justify-content:center;
+      color:#fff;
+      font: 600 36px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:2px;
+      z-index:10;
+      cursor:pointer;
+      user-select:none;
     }
-
-    video {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain; /* cambia a cover si quieres llenar todo */
-      background: #000;
-    }
-
-    /* Overlay opcional (por si quieres mensajes futuros) */
-    #overlay {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      font-size: 32px;
-      background: rgba(0,0,0,0.7);
-      z-index: 10;
-    }
+    video { width:100%; height:100%; object-fit:contain; background:#000; }
   </style>
 </head>
 
 <body>
+  <div id="overlay">INICIAR</div>
 
-  <video
-    id="player"
-    autoplay
-    muted
-    loop
+  <video id="player"
     playsinline
-    preload="auto"
-  >
-    <!-- CAMBIA EL NOMBRE SI TU ARCHIVO ES DISTINTO -->
-    <source src="video.mp4" type="video/mp4">
+    muted
+    autoplay
+    loop
+    preload="auto">
+    <source src="https://tv-medianow.mherrerab1991.workers.dev/video.mp4" type="video/mp4">
+    Tu navegador no soporta video HTML5.
   </video>
 
-  <div id="overlay">Cargando…</div>
-
   <script>
+    const overlay = document.getElementById('overlay');
     const video = document.getElementById('player');
 
-    /* Fuerza reproducción continua */
-    function forcePlay() {
-      video.play().catch(() => {
-        console.log('Autoplay bloqueado, reintentando...');
-        setTimeout(forcePlay, 1000);
-      });
-    }
-
-    forcePlay();
-
-    /* Evita pausas accidentales */
-    video.addEventListener('pause', () => {
-      forcePlay();
-    });
-
-    /* Reinicia si hay error */
-    video.addEventListener('error', () => {
-      console.log('Error de video, recargando...');
-      setTimeout(() => location.reload(), 3000);
-    });
-
-    /* Fullscreen automático (cuando el dispositivo lo permite) */
-    function goFullscreen() {
+    async function goFullScreen() {
       const el = document.documentElement;
-      if (el.requestFullscreen) el.requestFullscreen();
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      const req = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+      if (req) try { await req.call(el); } catch (_) {}
     }
 
-    // Intenta fullscreen automáticamente
-    setTimeout(goFullscreen, 1000);
+    async function start() {
+      overlay.style.display = 'none';
+      await goFullScreen();
+      try { await video.play(); } catch (_) {}
+    }
 
-    // Fallback: primer click activa fullscreen (por políticas del navegador)
-    document.addEventListener('click', goFullscreen, { once: true });
+    overlay.addEventListener('click', start);
+    overlay.addEventListener('touchstart', (e) => { e.preventDefault(); start(); }, { passive:false });
 
-    /* Evita que el sistema suspenda la reproducción */
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        forcePlay();
-      }
-    });
+    // Si el navegador bloquea autoplay, mostramos el overlay
+    video.addEventListener('play', () => overlay.style.display = 'none');
+    video.addEventListener('pause', () => overlay.style.display = 'flex');
+
+    // Evitar que se quede "pegado" si falla la carga
+    video.addEventListener('error', () => overlay.style.display = 'flex');
   </script>
-
 </body>
 </html>
