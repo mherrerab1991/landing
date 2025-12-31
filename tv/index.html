@@ -2,10 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <title>TV Player</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>TV</title>
   <style>
     html, body {
       margin: 0;
@@ -14,87 +12,94 @@
       height: 100%;
       background: #000;
       overflow: hidden;
-      cursor: none;
     }
 
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
+    /* Video siempre a pantalla completa */
+    #player {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover; /* usa cover para llenar sin barras */
       background: #000;
     }
 
+    /* Overlay SOLO para el botón, sin tapar el video con un bloque opaco */
     #overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.85);
-      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      font-size: 32px;
-      letter-spacing: 1px;
+      pointer-events: none; /* por defecto no bloquea clicks */
       z-index: 10;
+    }
+
+    /* Botón clickeable */
+    #startBtn {
+      pointer-events: auto; /* este sí recibe click */
+      background: rgba(0,0,0,0.35); /* transparente (no tapa) */
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 14px;
+      padding: 18px 38px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-size: 28px;
+      letter-spacing: 1px;
       cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       user-select: none;
     }
+
+    #startBtn:active { transform: scale(0.99); }
+
+    /* Ocultar overlay cuando ya está reproduciendo */
+    .hidden { display: none !important; }
   </style>
 </head>
 
 <body>
-
-  <!-- Overlay de inicio -->
-  <div id="overlay">INICIAR</div>
-
-  <!-- Video -->
   <video
     id="player"
     muted
     autoplay
-    loop
     playsinline
-    preload="auto">
-    <source
-      src="https://tv-medianow.mherrerab1991.workers.dev/video.mp4"
-      type="video/mp4">
+    loop
+    preload="auto"
+  >
+    <source src="https://tv-medianow.mherrerab1991.workers.dev/video.mp4" type="video/mp4" />
   </video>
 
+  <div id="overlay">
+    <button id="startBtn" type="button">INICIAR</button>
+  </div>
+
   <script>
-    const overlay = document.getElementById('overlay');
-    const video = document.getElementById('player');
-
-    async function goFullscreen() {
-      const el = document.documentElement;
-      const req =
-        el.requestFullscreen ||
-        el.webkitRequestFullscreen ||
-        el.mozRequestFullScreen ||
-        el.msRequestFullscreen;
-
-      if (req) {
-        try { await req.call(el); } catch (e) {}
-      }
-    }
+    const video = document.getElementById("player");
+    const overlay = document.getElementById("overlay");
+    const btn = document.getElementById("startBtn");
 
     async function startPlayback() {
-      overlay.style.display = 'none';
-
-      // Asegura autoplay
-      video.muted = true;
-
-      await goFullscreen();
-
       try {
+        // Asegura play (algunas TVs requieren gesto del usuario)
         await video.play();
+        // Si parte, ocultamos el botón
+        overlay.classList.add("hidden");
       } catch (e) {
-        console.log('Autoplay bloqueado:', e);
+        // Si falla, dejamos el botón visible
+        console.log("play() bloqueado:", e);
       }
     }
 
-    overlay.addEventListener('click', startPlayback);
-    overlay.addEventListener(
-      'touchstart',
-      (e) => {
-        e.preventDefault();
-        startPlayback();
+    // Click/tap en botón
+    btn.addEventListener("click", startPlayback);
+
+    // Si autoplay funciona, ocultar overlay apenas esté reproduciendo
+    video.addEventListener("playing", () => overlay.classList.add("hidden"));
+
+    // Si se pausa por cualquier motivo, mostrar overlay para reintentar
+    video.addEventListener("pause", () => overlay.classList.remove("hidden"));
+  </script>
+</body>
+</html>
