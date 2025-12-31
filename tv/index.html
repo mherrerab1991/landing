@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>TV Loop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; cursor:none; }
+    #overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.85); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-size:32px; letter-spacing:1px; z-index:10;
+    }
+    video { width:100%; height:100%; object-fit:contain; background:#000; }
+  </style>
+</head>
+<body>
+  <div id="overlay">INICIAR</div>
+<video id="player"
+  src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  muted autoplay playsinline loop preload="auto">
+</video>
+  <script>
+    const video = document.getElementById('player');
+    const overlay = document.getElementById('overlay');
+
+    async function start() {
+      try {
+        if (document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+        await video.play();
+        overlay.style.display = 'none';
+      } catch (e) { console.log(e); }
+    }
+    overlay.addEventListener('click', start);
+
+    setInterval(() => {
+      if (video.paused || video.ended) video.play().catch(()=>{});
+    }, 2000);
+
+    video.addEventListener('error', () => {
+      setTimeout(() => { video.load(); video.play().catch(()=>{}); }, 3000);
+    });
+  </script>
+</body>
+</html>
