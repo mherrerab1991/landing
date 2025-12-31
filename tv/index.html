@@ -1,64 +1,142 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TV</title>
+  <meta charset="UTF-8" />
+  <title>TV Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
   <style>
-    html, body { margin:0; padding:0; width:100%; height:100%; background:#000; overflow:hidden; }
-    #overlay{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.75);
-      display:flex; align-items:center; justify-content:center;
-      color:#fff;
-      font: 600 36px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      letter-spacing:2px;
-      z-index:10;
-      cursor:pointer;
-      user-select:none;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      overflow: hidden;
+      cursor: none;
     }
-    video { width:100%; height:100%; object-fit:contain; background:#000; }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 32px;
+      letter-spacing: 1px;
+      z-index: 10;
+    }
   </style>
 </head>
 
 <body>
+
+  <!-- Overlay de inicio -->
   <div id="overlay">INICIAR</div>
 
-  <video id="player"
-    playsinline
+  <!-- Reproductor -->
+  <video
+    id="player"
+    src="https://tv-medianow.mherrera1991.workers.dev/video.mp4"
     muted
     autoplay
+    playsinline
     loop
     preload="auto">
-    <source src="https://tv-medianow.mherrerab1991.workers.dev/video.mp4" type="video/mp4">
-    Tu navegador no soporta video HTML5.
   </video>
 
   <script>
     const overlay = document.getElementById('overlay');
     const video = document.getElementById('player');
 
-    async function goFullScreen() {
+    // ===== CONFIGURACIÓN =====
+    const DURATION_SEC = 58;       // duración del video
+    const MAX_DRIFT_SEC = 0.5;     // tolerancia máxima de desfase
+    const RESYNC_EVERY_MS = 1500;  // frecuencia de corrección
+    const START_OFFSET_SEC = 0;    // offset global opcional
+    // ========================
+
+    function nowSec() {
+      return Date.now() / 1000;
+    }
+
+    function targetTime(duration) {
+      let t = (nowSec() + START_OFFSET_SEC) % duration;
+      return t < 0 ? t + duration : t;
+    }
+
+    function resync() {
+      if (!isFinite(video.duration) || video.duration <= 0) return;
+
+      const duration = Math.round(video.duration) || DURATION_SEC;
+      const target = targetTime(duration);
+      const drift = Math.abs(video.currentTime - target);
+
+      if (drift > MAX_DRIFT_SEC) {
+        video.currentTime = target;
+      }
+    }
+
+    async function goFullscreen() {
       const el = document.documentElement;
-      const req = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
-      if (req) try { await req.call(el); } catch (_) {}
+      const fn =
+        el.requestFullscreen ||
+        el.webkitRequestFullscreen ||
+        el.mozRequestFullScreen ||
+        el.msRequestFullscreen;
+
+      if (fn) {
+        try { await fn.call(el); } catch (e) {}
+      }
     }
 
-    async function start() {
+    async function startPlayback() {
       overlay.style.display = 'none';
-      await goFullScreen();
-      try { await video.play(); } catch (_) {}
+      video.muted = true;
+
+      await goFullscreen();
+
+      try {
+        const duration =
+          isFinite(video.duration) && video.duration > 0
+            ? Math.round(video.duration)
+            : DURATION_SEC;
+
+        video.currentTime = targetTime(duration);
+      } catch (e) {}
+
+      try {
+        await video.play();
+      } catch (e) {}
+
+      setInterval(resync, RESYNC_EVERY_MS);
     }
 
-    overlay.addEventListener('click', start);
-    overlay.addEventListener('touchstart', (e) => { e.preventDefault(); start(); }, { passive:false });
+    overlay.addEventListener('click', startPlayback);
+    overlay.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      startPlayback();
+    }, { passive: false });
 
-    // Si el navegador bloquea autoplay, mostramos el overlay
-    video.addEventListener('play', () => overlay.style.display = 'none');
-    video.addEventListener('pause', () => overlay.style.display = 'flex');
+    video.addEventListener('pause', () => {
+      overlay.style.display = 'flex';
+    });
 
-    // Evitar que se quede "pegado" si falla la carga
-    video.addEventListener('error', () => overlay.style.display = 'flex');
+    video.addEventListener('error', () => {
+      overlay.style.display = 'flex';
+    });
   </script>
+
 </body>
 </html>
