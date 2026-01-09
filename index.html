@@ -5,416 +5,316 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
   <title>Top 15 Restaurantes en Chicureo | ChicureoLocal</title>
-  <meta name="description" content="Guía local con una selección de 15 restaurantes destacados en Chicureo. Tipos de comida, nivel de precio y atributos clave para elegir dónde comer." />
+  <meta name="description" content="Guía local con una selección de 15 restaurantes destacados en Chicureo. Tipo de comida, nivel de precio y atributos clave para elegir dónde comer." />
 
-  <!-- Open Graph (opcional, recomendado) -->
+  <!-- Open Graph (opcional) -->
   <meta property="og:title" content="Top 15 Restaurantes en Chicureo | ChicureoLocal" />
-  <meta property="og:description" content="Selección local de restaurantes en Chicureo, con información clara y fácil de escanear." />
+  <meta property="og:description" content="Selección local de restaurantes en Chicureo con información clara y fácil de escanear." />
   <meta property="og:type" content="website" />
 
   <style>
     :root{
-      --bg:#0b0f19;
-      --card:#111827;
-      --muted:#9ca3af;
-      --text:#e5e7eb;
-      --line:rgba(255,255,255,.08);
-      --chip:rgba(255,255,255,.06);
-      --accent:#ffffff;
+      /* Fondo claro + tarjetas blancas */
+      --bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #0f172a;      /* slate-900 */
+      --muted: #64748b;     /* slate-500 */
+      --line: rgba(15, 23, 42, 0.08);
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow2: 0 2px 10px rgba(15, 23, 42, 0.06);
+      --chip: rgba(15, 23, 42, 0.06);
       --max: 980px;
+      --radius: 16px;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background:linear-gradient(180deg, #070a12 0%, var(--bg) 100%);
-      color:var(--text);
-      line-height:1.5;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:32px 18px 56px;}
-    header{padding:10px 0 18px; border-bottom:1px solid var(--line); margin-bottom:22px;}
+
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 34px 18px 64px; }
+
+    header{
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 22px 22px 18px;
+      margin-bottom: 18px;
+    }
+
     .brand{
-      font-weight:800;
-      letter-spacing:.2px;
-      font-size:14px;
-      color:var(--muted);
-      text-transform:uppercase;
+      font-weight: 800;
+      letter-spacing: .2px;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
     }
-    h1{margin:8px 0 10px; font-size:34px; line-height:1.15;}
-    .lead{max-width:78ch; color:var(--muted); margin:0 0 10px;}
-    .note{color:var(--muted); margin:10px 0 0; font-size:13px;}
-    h2{font-size:18px; margin:28px 0 12px; color:var(--accent);}
+
+    h1{
+      margin: 10px 0 10px;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+    }
+
+    .lead{
+      max-width: 86ch;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .note{
+      color: var(--muted);
+      margin: 10px 0 0;
+      font-size: 13px;
+    }
+
+    h2{
+      font-size: 18px;
+      margin: 18px 0 12px;
+      color: var(--text);
+      letter-spacing: -0.2px;
+    }
+
     .grid{
-      display:grid;
+      display: grid;
       grid-template-columns: 1fr;
-      gap:12px;
-      margin-top:14px;
+      gap: 14px;
+      margin-top: 12px;
     }
-    @media (min-width: 840px){
-      .grid{grid-template-columns: 1fr 1fr;}
+
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
     }
+
     .card{
-      background:rgba(17,24,39,.72);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:16px 16px 14px;
-      backdrop-filter: blur(8px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow2);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
     }
+
+    /* Imagen superior con proporción estable (evita saltos de layout) */
+    .card-media{
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: rgba(15, 23, 42, 0.04);
+      overflow: hidden;
+    }
+    .card-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-body{
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
     .title{
-      margin:0;
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:.1px;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 850;
+      letter-spacing: -0.2px;
     }
+
     .type{
-      margin:3px 0 10px;
-      font-size:14px;
-      color:var(--muted);
-      font-weight:600;
+      margin: -6px 0 0;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 650;
     }
+
     .desc{
-      margin:0 0 12px;
-      color:var(--text);
-      opacity:.95;
-      max-width:70ch;
+      margin: 0;
+      color: var(--text);
+      opacity: .95;
     }
-    .meta{display:flex; flex-direction:column; gap:6px; font-size:14px; color:var(--text);}
-    .meta .muted{color:var(--muted)}
+
+    .meta{
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .meta-row{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+    }
+
+    .price{
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: .3px;
+    }
+
     .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
     }
+
     .chip{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:var(--chip);
-      border:1px solid var(--line);
-      font-size:13px;
-      color:var(--text);
-      opacity:.95;
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--chip);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--text);
+      opacity: .92;
     }
+
     footer{
-      border-top:1px solid var(--line);
-      margin-top:28px;
-      padding-top:18px;
-      color:var(--muted);
-      font-size:14px;
-      max-width:78ch;
+      margin-top: 18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow2);
+      padding: 18px 22px;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: var(--max);
+    }
+
+    footer p{ margin: 10px 0 0; }
+    footer p:first-of-type{ margin-top: 8px; }
+
+    /* Opcional: pequeño badge “Top 15” */
+    .badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(15, 23, 42, 0.18);
+      display: inline-block;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
+
     <header>
       <div class="brand">ChicureoLocal</div>
       <h1>Top 15 Restaurantes en Chicureo</h1>
       <p class="lead">
-        Descubre dónde comer en Chicureo con esta selección de restaurantes destacados, pensada para quienes buscan buenas
-        opciones gastronómicas sin perder tiempo. Desde parrillas y cocina internacional hasta propuestas familiares y cafeterías,
-        esta guía reúne alternativas en Chicureo considerando su estilo, nivel de precio y atributos clave.
+        Descubre dónde comer en Chicureo con esta selección de restaurantes destacados, pensada para quienes buscan buenas opciones gastronómicas
+        sin perder tiempo. Esta guía prioriza claridad: tipo de comida, nivel de precio y atributos prácticos para elegir.
       </p>
-      <p class="note">
-        Esta guía se actualiza periódicamente y mantiene un enfoque informativo y local.
-      </p>
+      <div class="badge"><span class="dot"></span>Actualización periódica · Enfoque informativo y local</div>
+      <p class="note">Nota: La selección no es un ranking numérico; es una curaduría local.</p>
     </header>
 
     <main>
-      <h2>Restaurantes destacados en Chicureo</h2>
+      <h2>Restaurantes destacados</h2>
 
       <section class="grid">
 
-        <!-- 1 -->
+        <!-- 1) EJEMPLO REAL -->
         <article class="card">
-          <h3 class="title">La Cabrera Chicureo</h3>
-          <div class="type">Parrilla argentina</div>
+          <div class="card-media">
+            <!-- Reemplaza el src por tu imagen (URL o ruta local) -->
+            <img
+              src="https://TU-URL-O-RUTA/la-cabrera-chicureo.jpg"
+              alt="La Cabrera Chicureo - Parrilla argentina"
+              loading="lazy"
+            />
+          </div>
 
-          <p class="desc">
-            Parrilla de carnes premium con ambiente familiar, ideal para almuerzos de fin de semana y celebraciones en grupo.
-          </p>
+          <div class="card-body">
+            <div>
+              <h3 class="title">La Cabrera Chicureo</h3>
+              <div class="type">Parrilla argentina</div>
+            </div>
 
-          <div class="meta">
-            <div><span class="muted">📍</span> Piedra Roja, Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲💲</div>
-            <div class="tags">
-              <span class="chip">Familiar</span>
-              <span class="chip">Terraza</span>
-              <span class="chip">Estacionamiento</span>
+            <p class="desc">
+              Parrilla de carnes premium con ambiente familiar, ideal para almuerzos de fin de semana y celebraciones en grupo.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲💲</span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Terraza</span>
+                <span class="chip">Estacionamiento</span>
+              </div>
             </div>
           </div>
         </article>
 
-        <!-- 2 -->
+        <!-- 2) PLANTILLA (copia/pega 14 veces) -->
         <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
+          <div class="card-media">
+            <img
+              src="https://TU-URL-O-RUTA/restaurant-02.jpg"
+              alt="[Nombre del restaurante] - [Tipo de comida]"
+              loading="lazy"
+            />
+          </div>
 
-          <p class="desc">
-            [Descripción breve del restaurante en 2–3 líneas. Enfoque informativo y local, sin frases promocionales.]
-          </p>
+          <div class="card-body">
+            <div>
+              <h3 class="title">[Nombre del restaurante]</h3>
+              <div class="type">[Tipo de comida]</div>
+            </div>
 
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
+            <p class="desc">
+              [Descripción breve del restaurante en 2–3 líneas. Enfoque informativo y local, sin frases promocionales.]
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>[Sector o referencia], Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="tags">
+                <span class="chip">[Tag]</span>
+                <span class="chip">[Tag]</span>
+                <span class="chip">[Tag]</span>
+              </div>
             </div>
           </div>
         </article>
 
-        <!-- 3 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">
-            [Descripción breve del restaurante en 2–3 líneas. Mantén consistencia editorial y largo similar.]
-          </p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">
-            [Descripción breve del restaurante en 2–3 líneas, indicando si es buena opción para familia, parejas o celebraciones.]
-          </p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 9 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 10 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 11 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 12 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 13 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 14 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 15 -->
-        <article class="card">
-          <h3 class="title">[Nombre del restaurante]</h3>
-          <div class="type">[Tipo de comida]</div>
-
-          <p class="desc">[Descripción breve en 2–3 líneas.]</p>
-
-          <div class="meta">
-            <div><span class="muted">📍</span> Chicureo</div>
-            <div><span class="muted">💲</span> 💲💲</div>
-            <div class="tags">
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-              <span class="chip">[Tag]</span>
-            </div>
-          </div>
-        </article>
+        <!-- 3..15: duplica el bloque PLANTILLA y cambia contenido + imagen -->
 
       </section>
 
       <footer>
         <h2>¿Dónde comer en Chicureo?</h2>
         <p>
-          Chicureo cuenta con una oferta gastronómica cada vez más diversa, con restaurantes que van desde propuestas familiares
-          hasta opciones más especializadas. Esta guía busca ser un punto de referencia local para quienes viven o visitan la zona
-          y quieren conocer alternativas para almorzar, cenar o reunirse.
+          Chicureo cuenta con una oferta gastronómica cada vez más diversa, con restaurantes que van desde propuestas familiares hasta opciones más especializadas.
+          Esta guía busca ser un punto de referencia local para quienes viven o visitan la zona.
         </p>
         <p>
-          Seguiremos incorporando y actualizando restaurantes para mantener esta selección vigente y representativa de la oferta
-          gastronómica en Chicureo.
+          Seguiremos incorporando y actualizando restaurantes para mantener esta selección vigente y representativa.
         </p>
       </footer>
     </main>
+
   </div>
 </body>
 </html>
