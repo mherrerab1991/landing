@@ -4,21 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <!-- SEO básico -->
   <title>Top 15 Restaurantes en Chicureo (Guía Local) | ChicureoLocal</title>
   <meta name="description" content="Guía local con 15 restaurantes destacados en Chicureo. Tipo de comida, nivel de precio y atributos clave para elegir dónde comer." />
-  <link rel="canonical" href="https://TU-DOMINIO/top-restaurantes-chicureo" />
   <meta name="robots" content="index,follow" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Top 15 Restaurantes en Chicureo | ChicureoLocal" />
   <meta property="og:description" content="Selección local de restaurantes en Chicureo con información clara y fácil de escanear." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://TU-DOMINIO/top-restaurantes-chicureo" />
-  <meta property="og:image" content="https://TU-DOMINIO/images/og-top-restaurantes-chicureo.jpg" />
-
-  <!-- Twitter (opcional) -->
-  <meta name="twitter:card" content="summary_large_image" />
 
   <style>
     :root{
@@ -27,7 +20,6 @@
       --text:#0f172a;
       --muted:#64748b;
       --line:rgba(15, 23, 42, 0.10);
-      --shadow:0 10px 28px rgba(15, 23, 42, 0.08);
       --shadow2:0 2px 12px rgba(15, 23, 42, 0.06);
       --chip:rgba(15, 23, 42, 0.06);
       --max: 1040px;
@@ -48,23 +40,13 @@
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:34px 18px 70px;}
 
-    /* Accesibilidad: link para saltar a contenido */
     .skip-link{
-      position:absolute;
-      left:-999px;
-      top:auto;
-      width:1px;
-      height:1px;
-      overflow:hidden;
+      position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden;
     }
     .skip-link:focus{
-      left:18px; top:12px;
-      width:auto; height:auto;
-      padding:10px 12px;
-      background:var(--surface);
-      border:1px solid var(--line);
-      border-radius:12px;
-      box-shadow:var(--shadow2);
+      left:18px; top:12px; width:auto; height:auto;
+      padding:10px 12px; background:var(--surface);
+      border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow2);
       z-index:9999;
     }
 
@@ -78,68 +60,48 @@
     }
 
     .topbar{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
     }
 
     .brand{
-      font-weight:850;
-      letter-spacing:.2px;
-      font-size:13px;
-      color:var(--muted);
-      text-transform:uppercase;
+      font-weight:850; letter-spacing:.2px; font-size:13px;
+      color:var(--muted); text-transform:uppercase;
     }
 
     .meta-mini{
-      font-size:13px;
-      color:var(--muted);
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
+      font-size:13px; color:var(--muted);
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
     }
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(15, 23, 42, 0.03);
+      display:inline-flex; align-items:center; gap:8px;
+      padding:7px 10px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(15, 23, 42, 0.03);
     }
     .dot{width:8px; height:8px; border-radius:999px; background:rgba(15,23,42,.25); display:inline-block;}
 
     h1{
       margin:10px 0 10px;
-      font-size:34px;
-      line-height:1.15;
-      letter-spacing:-0.35px;
+      font-size:34px; line-height:1.15; letter-spacing:-0.35px;
     }
 
-    .lead{
-      max-width:92ch;
-      color:var(--muted);
-      margin:0;
+    .lead{max-width:92ch; color:var(--muted); margin:0;}
+    .note{color:var(--muted); margin:12px 0 0; font-size:13px;}
+
+    h2{
+      font-size:18px; margin:18px 0 12px; color:var(--text); letter-spacing:-0.2px;
     }
 
-    .note{
+    .disclaimer{
+      margin-top:12px;
+      padding:12px 12px;
+      border-radius:var(--radius2);
+      border:1px dashed rgba(15,23,42,.18);
+      background:rgba(15,23,42,.03);
       color:var(--muted);
-      margin:12px 0 0;
       font-size:13px;
     }
 
-    /* Secciones */
-    h2{
-      font-size:18px;
-      margin:18px 0 12px;
-      color:var(--text);
-      letter-spacing:-0.2px;
-    }
-
-    /* Grid tarjetas */
     .grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -161,7 +123,6 @@
       min-height:100%;
     }
 
-    /* Imagen: ratio fijo 16:9 + object-fit cover */
     .card-media{
       position:relative;
       width:100%;
@@ -174,7 +135,6 @@
       height:100%;
       object-fit:cover;
       display:block;
-      /* Suaviza “parpadeo” cuando carga */
       transform: translateZ(0);
     }
 
@@ -199,39 +159,14 @@
       font-weight:650;
     }
 
-    .desc{
-      margin:0;
-      color:var(--text);
-      opacity:.95;
-    }
+    .desc{margin:0; color:var(--text); opacity:.95;}
 
-    .meta{
-      display:grid;
-      gap:6px;
-      font-size:14px;
-      color:var(--text);
-    }
+    .meta{display:grid; gap:6px; font-size:14px; color:var(--text);}
+    .meta-row{display:flex; align-items:center; gap:8px; color:var(--muted);}
 
-    .meta-row{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--muted);
-    }
+    .price{color:var(--text); font-weight:800; letter-spacing:.3px;}
 
-    .price{
-      color:var(--text);
-      font-weight:800;
-      letter-spacing:.3px;
-    }
-
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:2px;
-    }
-
+    .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:2px;}
     .chip{
       display:inline-block;
       padding:6px 10px;
@@ -242,6 +177,13 @@
       color:var(--text);
       opacity:.92;
     }
+
+    .site a{
+      color:var(--muted);
+      text-decoration:none;
+      border-bottom:1px solid rgba(100,116,139,.35);
+    }
+    .site a:hover{color:var(--text);}
 
     footer{
       margin-top:18px;
@@ -255,39 +197,7 @@
     }
     footer p{margin:10px 0 0;}
     footer p:first-of-type{margin-top:8px;}
-
-    /* Opcional: mensaje de “no ranking” destacado */
-    .disclaimer{
-      margin-top:12px;
-      padding:12px 12px;
-      border-radius:var(--radius2);
-      border:1px dashed rgba(15,23,42,.18);
-      background:rgba(15,23,42,.03);
-      color:var(--muted);
-      font-size:13px;
-    }
   </style>
-
-  <!-- JSON-LD (opcional): ItemList para SEO. Completa nombres/URLs cuando estén definitivos.
-       IMPORTANTE: solo pon restaurantes reales + URLs reales cuando las tengas.
-  -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Top 15 Restaurantes en Chicureo",
-    "itemListOrder": "https://schema.org/ItemListUnordered",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "La Cabrera Chicureo",
-        "url": "https://TU-DOMINIO/top-restaurantes-chicureo#la-cabrera-chicureo"
-      }
-      /* Agrega aquí los demás cuando tengas nombres/anchors finales */
-    ]
-  }
-  </script>
 </head>
 
 <body>
@@ -316,7 +226,7 @@
       </div>
 
       <p class="note">
-        Sugerencia de estándar editorial: descripciones de 2–3 líneas, sin superlativos (“el mejor”, “imperdible”) y sin promociones.
+        Estándar editorial: descripciones de 2–3 líneas, sin superlativos (“el mejor”, “imperdible”) y sin promociones.
       </p>
     </header>
 
@@ -325,30 +235,217 @@
 
       <section class="grid">
 
-        <!-- 1) EJEMPLO REAL -->
-        <article class="card" id="la-cabrera-chicureo">
+        <!-- 01 -->
+        <article class="card" id="wallys-chicureo">
           <div class="card-media">
-            <!-- Imagen: ideal 1200x675 (16:9). Evita logos; prefiere ambiente/platos. -->
-            <img
-              src="images/la-cabrera-chicureo.jpg"
-              alt="La Cabrera Chicureo – Parrilla argentina en Chicureo"
-              loading="lazy"
-            />
+            <img src="images/wallys-chicureo.jpg" alt="Wally’s Chicureo – Hamburguesería gourmet en Chicureo" loading="lazy" />
           </div>
-
           <div class="card-body">
             <div>
-              <h3 class="title">La Cabrera Chicureo</h3>
-              <div class="type">Parrilla argentina</div>
+              <h3 class="title">Wally’s Chicureo</h3>
+              <div class="type">Hamburguesería gourmet</div>
             </div>
 
             <p class="desc">
-              Parrilla de carnes premium con ambiente familiar, ideal para almuerzos de fin de semana y celebraciones en grupo.
+              Local de hamburguesas premium con ambiente moderno y relajado, ideal para salidas familiares informales o almuerzos rápidos con amigos.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Chamisero, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://wallys.cl" target="_blank" rel="noopener noreferrer">wallys.cl</a></span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Delivery</span>
+                <span class="chip">Terraza</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="card" id="positano-caffe-cucina">
+          <div class="card-media">
+            <img src="images/positano-caffe-cucina.jpg" alt="Positano Caffè &amp; Cucina – Cocina italiana en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Positano Caffè &amp; Cucina</h3>
+              <div class="type">Cocina italiana</div>
+            </div>
+
+            <p class="desc">
+              Auténtica trattoria italiana con pastas artesanales y sabores tradicionales, ideal para almuerzos en familia y cenas acogedoras en pareja.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Reservas</span>
+                <span class="chip">Terraza</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="card" id="donde-gilberto">
+          <div class="card-media">
+            <img src="images/donde-gilberto.jpg" alt="Donde Gilberto – Marisquería en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Donde Gilberto</h3>
+              <div class="type">Marisquería</div>
+            </div>
+
+            <p class="desc">
+              Restaurante de mariscos frescos y ambiente cálido, ideal para comidas en familia y noches de música en vivo con amigos.
             </p>
 
             <div class="meta">
               <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
               <div class="meta-row">💲 <span class="price">💲💲💲</span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Reservas</span>
+                <span class="chip">Terraza</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="card" id="el-fogon-del-lenador">
+          <div class="card-media">
+            <img src="images/el-fogon-del-lenador.jpg" alt="El Fogón del Leñador – Parrilla chilena en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">El Fogón del Leñador</h3>
+              <div class="type">Parrilla chilena</div>
+            </div>
+
+            <p class="desc">
+              Parrillada de cortes premium en un entorno rústico, ideal para almuerzos familiares y cenas entretenidas de viernes con música en vivo.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Caletera San Martín, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲💲</span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Reservas</span>
+                <span class="chip">Estacionamiento</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 -->
+        <article class="card" id="barra-olivo">
+          <div class="card-media">
+            <img src="images/barra-olivo.jpg" alt="Barra Olivo – Cocina peruana en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Barra Olivo</h3>
+              <div class="type">Cocina peruana</div>
+            </div>
+
+            <p class="desc">
+              Restaurante peruano tradicional con ceviches, tiraditos y ají de gallina, ideal para disfrutar en familia de auténticos sabores del Perú sin salir de Chicureo.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Reservas</span>
+                <span class="chip">Terraza</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 06 -->
+        <article class="card" id="al-pesto-restaurante">
+          <div class="card-media">
+            <img src="images/al-pesto-restaurante.jpg" alt="Al Pesto Restaurante – Cocina italiana en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Al Pesto Restaurante</h3>
+              <div class="type">Cocina italiana</div>
+            </div>
+
+            <p class="desc">
+              Restaurante italiano de pastas caseras y pizzas a la piedra, ideal para celebraciones familiares y cenas con sabor mediterráneo en un ambiente acogedor.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.tripadvisor.es/" target="_blank" rel="noopener noreferrer">tripadvisor.es</a></span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Reservas</span>
+                <span class="chip">Terraza</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 07 -->
+        <article class="card" id="taranta">
+          <div class="card-media">
+            <img src="images/taranta.jpg" alt="Taranta – Trattoria italiana en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Taranta</h3>
+              <div class="type">Trattoria italiana</div>
+            </div>
+
+            <p class="desc">
+              Pizzas a la piedra, pastas frescas y amplia carta de cócteles en un espacio de ambiente familiar, ideal para cenas grupales o encuentros con amigos en la terraza.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Chamisero, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">facebook.com</a></span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Terraza</span>
+                <span class="chip">Reservas</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 08 -->
+        <article class="card" id="el-establo">
+          <div class="card-media">
+            <img src="images/el-establo.jpg" alt="El Establo – Cocina internacional en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">El Establo</h3>
+              <div class="type">Cocina internacional</div>
+            </div>
+
+            <p class="desc">
+              Restaurante familiar de cocina variada (carnes, pizzas, sushi y más) con gran capacidad, ideal para grupos grandes que buscan calidad, variedad y buen ambiente en un solo lugar.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">facebook.com</a></span></div>
               <div class="tags">
                 <span class="chip">Familiar</span>
                 <span class="chip">Terraza</span>
@@ -358,39 +455,201 @@
           </div>
         </article>
 
-        <!-- 2) PLANTILLA (duplica hasta completar 15) -->
-        <article class="card" id="restaurante-02">
+        <!-- 09 -->
+        <article class="card" id="pizza-bistrot">
           <div class="card-media">
-            <img
-              src="images/restaurant-02.jpg"
-              alt="[Nombre del restaurante] – [Tipo de comida] en Chicureo"
-              loading="lazy"
-            />
+            <img src="images/pizza-bistrot.jpg" alt="Pizza Bistrot – Pizzería artesanal en Chicureo" loading="lazy" />
           </div>
-
           <div class="card-body">
             <div>
-              <h3 class="title">[Nombre del restaurante]</h3>
-              <div class="type">[Tipo de comida]</div>
+              <h3 class="title">Pizza Bistrot</h3>
+              <div class="type">Pizzería artesanal</div>
             </div>
 
             <p class="desc">
-              [Descripción breve del restaurante en 2–3 líneas. Enfoque informativo y local.]
+              Pizzería gourmet con propuestas innovadoras y sabores creativos (pulpo, charcutería, etc.), ideal para comidas relajadas en familia o picoteos con amigos en su acogedora terraza.
             </p>
 
             <div class="meta">
-              <div class="meta-row">📍 <span>[Sector o referencia], Chicureo</span></div>
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
               <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">instagram.com</a></span></div>
               <div class="tags">
-                <span class="chip">[Tag]</span>
-                <span class="chip">[Tag]</span>
-                <span class="chip">[Tag]</span>
+                <span class="chip">Familiar</span>
+                <span class="chip">Terraza</span>
+                <span class="chip">Delivery</span>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 3..15: duplica el bloque PLANTILLA -->
+        <!-- 10 -->
+        <article class="card" id="patagonia-chicureo">
+          <div class="card-media">
+            <img src="images/patagonia-chicureo.jpg" alt="Patagonia Chicureo – Restobar cervecero en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Patagonia Chicureo</h3>
+              <div class="type">Restobar cervecero</div>
+            </div>
+
+            <p class="desc">
+              Bar-restaurante con cervezas artesanales y carnes a la parrilla, ideal para disfrutar al aire libre entre amigos al atardecer, acompañado de buena música y un ambiente distendido.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="tags">
+                <span class="chip">Pet friendly</span>
+                <span class="chip">Terraza</span>
+                <span class="chip">Reservas</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 11 -->
+        <article class="card" id="el-deck">
+          <div class="card-media">
+            <img src="images/el-deck.jpg" alt="El Deck – Restobar peruano en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">El Deck</h3>
+              <div class="type">Restobar peruano</div>
+            </div>
+
+            <p class="desc">
+              Restaurante-bar con terraza sobre la laguna, comida peruana y cócteles tropicales, ideal para tardes al aire libre y encuentros relajados entre amigos con vista al agua.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.tripadvisor.es/" target="_blank" rel="noopener noreferrer">tripadvisor.es</a></span></div>
+              <div class="tags">
+                <span class="chip">Pet friendly</span>
+                <span class="chip">Terraza</span>
+                <span class="chip">Familiar</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 12 -->
+        <article class="card" id="ola-brava">
+          <div class="card-media">
+            <img src="images/ola-brava.jpg" alt="Ola Brava – Cocina peruana fusión en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Ola Brava</h3>
+              <div class="type">Cocina peruana fusión</div>
+            </div>
+
+            <p class="desc">
+              Gastrobar peruano de autor con platos creativos del mar y mixología de primer nivel, ideal para una cena sofisticada o celebraciones especiales con sabores innovadores.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">instagram.com</a></span></div>
+              <div class="tags">
+                <span class="chip">Reservas</span>
+                <span class="chip">Terraza</span>
+                <span class="chip">Estacionamiento</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 13 -->
+        <article class="card" id="aleman-experto">
+          <div class="card-media">
+            <img src="images/aleman-experto.jpg" alt="Alemán Experto – Sandwichería alemana en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Alemán Experto</h3>
+              <div class="type">Sandwichería alemana</div>
+            </div>
+
+            <p class="desc">
+              Fuente de soda estilo alemán famosa por sus lomitos, crudos y cerveza artesanal, ideal para almuerzos informales en familia o juntarse con amigos a disfrutar sándwiches clásicos.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">facebook.com</a></span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Delivery</span>
+                <span class="chip">Estacionamiento</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 14 -->
+        <article class="card" id="tokei-sushi-nikkei">
+          <div class="card-media">
+            <img src="images/tokei-sushi-nikkei.jpg" alt="Tokei Sushi Nikkei – Sushi nikkei en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">Tokei Sushi Nikkei</h3>
+              <div class="type">Sushi nikkei</div>
+            </div>
+
+            <p class="desc">
+              Barra de sushi de fusión peruano-japonesa con ingredientes frescos y rolls de autor, ideal para una cena tranquila en pareja o pedir a domicilio y disfrutar en casa.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Piedra Roja, Chicureo</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.tripadvisor.com/" target="_blank" rel="noopener noreferrer">tripadvisor.com</a></span></div>
+              <div class="tags">
+                <span class="chip">Reservas</span>
+                <span class="chip">Delivery</span>
+                <span class="chip">Terraza</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 15 -->
+        <article class="card" id="el-territorio-sangucheria">
+          <div class="card-media">
+            <img src="images/el-territorio-sangucheria.jpg" alt="El Territorio Sanguchería – Sanguchería local en Chicureo" loading="lazy" />
+          </div>
+          <div class="card-body">
+            <div>
+              <h3 class="title">El Territorio Sanguchería</h3>
+              <div class="type">Sanguchería local</div>
+            </div>
+
+            <p class="desc">
+              Sandwichería chilena con gran variedad de sánguches personalizables, ideal para almuerzos rápidos en familia o pedir a domicilio un antojo contundente.
+            </p>
+
+            <div class="meta">
+              <div class="meta-row">📍 <span>Chicureo (Av. Chicureo Km 2)</span></div>
+              <div class="meta-row">💲 <span class="price">💲💲</span></div>
+              <div class="meta-row site">🌐 <span><a href="https://www.tripadvisor.es/" target="_blank" rel="noopener noreferrer">tripadvisor.es</a></span></div>
+              <div class="tags">
+                <span class="chip">Familiar</span>
+                <span class="chip">Delivery</span>
+                <span class="chip">Estacionamiento</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </section>
 
       <footer>
@@ -406,12 +665,27 @@
     </main>
   </div>
 
-  <!-- Guía de consistencia (comentarios internos):
-    1) Alt text siempre: "NOMBRE – TIPO DE COMIDA en Chicureo"
-    2) Imágenes: 16:9, 1200x675 ideal, evitar logos.
-    3) Orden: no numerar 1..15 en pantalla; mantener curaduría (no ranking).
-    4) Descripción: 2–3 líneas, tono informativo, sin superlativos ni promos.
+  <!--
+    IMPORTANTE (para que te funcione sin ajustes):
+    1) Sube 15 imágenes en /images con estos nombres exactos (o cambia los src):
+       - wallys-chicureo.jpg
+       - positano-caffe-cucina.jpg
+       - donde-gilberto.jpg
+       - el-fogon-del-lenador.jpg
+       - barra-olivo.jpg
+       - al-pesto-restaurante.jpg
+       - taranta.jpg
+       - el-establo.jpg
+       - pizza-bistrot.jpg
+       - patagonia-chicureo.jpg
+       - el-deck.jpg
+       - ola-brava.jpg
+       - aleman-experto.jpg
+       - tokei-sushi-nikkei.jpg
+       - el-territorio-sangucheria.jpg
+
+    2) Recomendación de tamaño: 1200x675 (16:9).
+    3) Si alguno tiene sitio oficial real, reemplaza los links genéricos (facebook/instagram/tripadvisor) por el link específico del local.
   -->
 </body>
 </html>
-
