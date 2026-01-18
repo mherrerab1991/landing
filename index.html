@@ -8,6 +8,19 @@
   <meta name="robots" content="noindex,nofollow" />
   <link rel="stylesheet" href="/styles.css" />
   <link rel="icon" href="data:,">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2FGW4C8NS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-M2FGW4C8NS', {
+      anonymize_ip: true,
+      send_page_view: true
+    });
+  </script>
 </head>
 
 <body>
@@ -46,18 +59,5 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
-
-   <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2FGW4C8NS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-M2FGW4C8NS', {
-    anonymize_ip: true
-  });
-</script>
-</head>
 </body>
 </html>
