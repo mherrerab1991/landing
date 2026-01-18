@@ -16,6 +16,7 @@ export async function onRequest(context) {
     "/index.html",
     "/login.html",
     "/styles.css",
+     "/ping"
   ]);
 
   if (url.pathname.startsWith("/api/")) return next();
