@@ -3,11 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+
   <title>Archivo Familiar Herrera Barahona</title>
   <meta name="description" content="Archivo privado familiar. Acceso restringido." />
+
+  <!-- Privacidad / indexación -->
   <meta name="robots" content="noindex,nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://herrerabarahona.com/" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="data:,">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+
+  <!-- Open Graph / Twitter (preview genérico, sin datos sensibles) -->
+  <meta property="og:title" content="Archivo Familiar Herrera Barahona" />
+  <meta property="og:description" content="Archivo privado familiar. Acceso restringido." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://herrerabarahona.com/" />
+  <!-- Opcional: agrega una imagen genérica si quieres -->
+  <!-- <meta property="og:image" content="https://herrerabarahona.com/assets/og.jpg" /> -->
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Archivo Familiar Herrera Barahona" />
+  <meta name="twitter:description" content="Archivo privado familiar. Acceso restringido." />
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2FGW4C8NS"></script>
@@ -25,7 +50,7 @@
 
 <body>
   <main class="shell">
-    <section class="card">
+    <section class="card" role="region" aria-label="Acceso al archivo familiar">
       <header class="header">
         <div class="badge" aria-hidden="true">Privado</div>
         <h1>Archivo Familiar Herrera Barahona</h1>
@@ -35,14 +60,19 @@
       </header>
 
       <div class="content">
-        <div class="notice">
+        <div class="notice" role="note">
           <strong>Acceso restringido.</strong>
           El contenido completo está disponible únicamente para la familia autorizada.
         </div>
 
         <div class="actions">
           <a class="btn primary" href="/login.html">Acceso familiar</a>
-          <a class="btn ghost" href="mailto:" aria-disabled="true" title="Opcional: agregar correo de contacto más adelante">
+
+          <!-- Contacto (opcional)
+               Para habilitarlo: reemplaza CONTACT_EMAIL por tu correo real.
+               Ej: href="mailto:contacto@herrerabarahona.com"
+          -->
+          <a class="btn ghost" href="#" id="contactLink" hidden>
             Contacto (opcional)
           </a>
         </div>
@@ -57,7 +87,17 @@
   </main>
 
   <script>
+    // Año dinámico
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Habilitar contacto si defines un email real
+    // (deja oculto si no hay correo)
+    const CONTACT_EMAIL = ""; // ejemplo: "contacto@herrerabarahona.com"
+    const contactLink = document.getElementById("contactLink");
+    if (CONTACT_EMAIL && CONTACT_EMAIL.includes("@")) {
+      contactLink.href = "mailto:" + CONTACT_EMAIL;
+      contactLink.hidden = false;
+    }
   </script>
 </body>
 </html>
