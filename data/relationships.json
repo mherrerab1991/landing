@@ -1,0 +1,9 @@
+[
+  { "type": "parent", "from": "luis-barahona-arias-1916", "to": "rosa-barahona-leon-1957" },
+  { "type": "parent", "from": "maria-elisa-leon-duarte-1918", "to": "rosa-barahona-leon-1957" },
+
+  { "type": "marriage", "a": "luis-barahona-arias-1916", "b": "maria-elisa-leon-duarte-1918", "date": "1951-01-22", "place": "San Miguel, Chile" },
+
+  { "type": "parent", "from": "neftali-herrera-ortiz", "to": "miguel-herrera-troncoso-1956" },
+  { "type": "parent", "from": "norma-troncoso-henriquez", "to": "miguel-herrera-troncoso-1956" }
+]
