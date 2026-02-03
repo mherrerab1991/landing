@@ -4,150 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Acceso familiar · Herrera Barahona</title>
-  <meta name="description" content="Acceso privado familiar." />
   <meta name="robots" content="noindex,nofollow" />
   <link rel="stylesheet" href="/styles.css" />
-  <link rel="icon" href="data:,">
-
-  <!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2FGW4C8NS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  // En login: solo page_view, sin datos personales
-  gtag('config', 'G-M2FGW4C8NS', {
-    anonymize_ip: true,
-    send_page_view: true
-  });
-</script>
-
 </head>
 
 <body>
   <main class="shell">
     <section class="card">
       <header class="header">
-        <a class="back" href="/index.html">← Volver</a>
+        <div class="badge" aria-hidden="true">Privado</div>
         <h1>Acceso familiar</h1>
-        <p class="lead">Ingresa con tu RUT y clave para acceder al archivo privado.</p>
+        <p class="lead">Para ingresar al archivo, debes estar autorizado.</p>
       </header>
 
       <div class="content">
-        <form id="loginForm" class="form" novalidate>
-          <label class="field">
-            <span class="label">RUT</span>
-            <input
-              id="rut"
-              name="rut"
-              type="text"
-              inputmode="text"
-              autocomplete="username"
-              placeholder="Ej: 18115531-0"
-              required
-            />
-            <span class="hint">Sin puntos. Con guion y dígito verificador.</span>
-          </label>
+        <div class="notice">
+          Si el acceso está habilitado con Cloudflare Access, al entrar a las secciones privadas se te pedirá autenticación automáticamente.
+        </div>
 
-          <label class="field">
-            <span class="label">Clave</span>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="Tu clave"
-              required
-              minlength="6"
-            />
-          </label>
+        <div class="actions">
+          <a class="btn primary" href="/app/tree.html">Entrar al archivo</a>
+          <a class="btn ghost" href="/">Volver al inicio</a>
+        </div>
 
-          <div class="actions">
-            <button class="btn primary" type="submit" id="submitBtn">Ingresar</button>
-            <button class="btn ghost" type="button" id="clearBtn">Limpiar</button>
-          </div>
-
-          <div id="msg" class="msg" role="status" aria-live="polite"></div>
-
-          <div class="notice subtle">
-            Si no tienes acceso, solicita autorización al administrador familiar.
-          </div>
-        </form>
+        <footer class="footer">
+          <small>Si no tienes acceso, solicita invitación al administrador familiar.</small>
+        </footer>
       </div>
     </section>
   </main>
-
-  <script>
-    const form = document.getElementById("loginForm");
-    const rutEl = document.getElementById("rut");
-    const pwEl = document.getElementById("password");
-    const msg = document.getElementById("msg");
-    const clearBtn = document.getElementById("clearBtn");
-    const submitBtn = document.getElementById("submitBtn");
-
-    function normalizeRut(raw) {
-      // Quita puntos y espacios, deja guion si existe, mayus DV
-      return raw
-        .trim()
-        .replace(/\./g, "")
-        .replace(/\s+/g, "")
-        .replace(/–/g, "-")
-        .toUpperCase();
-    }
-
-    function setMessage(text, kind = "") {
-      msg.className = "msg " + kind;
-      msg.textContent = text || "";
-    }
-
-    clearBtn.addEventListener("click", () => {
-      rutEl.value = "";
-      pwEl.value = "";
-      setMessage("");
-      rutEl.focus();
-    });
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      setMessage("");
-
-      const rut = normalizeRut(rutEl.value);
-      const password = pwEl.value;
-
-      if (!rut || !password) {
-        setMessage("Completa RUT y clave.", "error");
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Ingresando...";
-
-      try {
-        // Worker se implementará después en /api/login
-        const res = await fetch("/api/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ rut, password })
-        });
-
-        const payload = await res.json().catch(() => ({}));
-
-        if (res.ok) {
-          // Worker debería setear cookie de sesión
-          const redirectTo = payload.redirectTo || "/app/";
-          window.location.assign(redirectTo);
-          return;
-        }
-
-        setMessage(payload.message || "Credenciales inválidas.", "error");
-      } catch (err) {
-        setMessage("No se pudo conectar. Intenta nuevamente.", "error");
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Ingresar";
-      }
-    });
-  </script>
 </body>
 </html>
+
