@@ -1,0 +1,5 @@
+# Normaliza acceso a /app -> /app/tree.html
+/app  /app/tree.html  302
+
+# Si alguien pega /tree, lo mandamos a la ruta real
+/tree /app/tree.html  302
