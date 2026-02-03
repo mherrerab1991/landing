@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rosa-barahona-leon-1957",
+    "fullName": "Rosa del Carmen Barahona León",
+    "birth": { "date": "1957-09-08", "place": "San Miguel, Chile" },
+    "death": null,
+    "notes": "Datos confirmados.",
+    "media": { "photos": [], "documents": [] }
+  },
+  {
+    "id": "luis-barahona-arias-1916",
+    "fullName": "Luis Barahona Arias",
+    "birth": { "date": "1916-11-12", "place": "Chile" },
+    "death": { "date": "1996-08-07", "place": "Hospital San José, Independencia, Chile" },
+    "notes": "Fallecimiento a las 13:30. Causa: insuficiencia respiratoria global, bronconeumonía extensa e insuficiencia cardíaca.",
+    "media": { "photos": [], "documents": [] }
+  },
+  {
+    "id": "maria-elisa-leon-duarte-1918",
+    "fullName": "María Elisa León Duarte",
+    "birth": { "date": "1918-05-15", "place": "Chile" },
+    "death": { "date": "1994-08-12", "place": "Huechuraba, Chile" },
+    "notes": "Datos confirmados.",
+    "media": { "photos": [], "documents": [] }
+  },
+  {
+    "id": "miguel-herrera-troncoso-1956",
+    "fullName": "Miguel Neftalí Herrera Troncoso",
+    "birth": { "date": "1956-07-19", "place": "Estación, Chile" },
+    "death": null,
+    "notes": "Datos confirmados.",
+    "media": { "photos": [], "documents": [] }
+  },
+  {
+    "id": "neftali-herrera-ortiz",
+    "fullName": "Neftalí del Carmen Herrera Ortiz",
+    "birth": null,
+    "death": null,
+    "notes": "Padre de Miguel Neftalí Herrera Troncoso. Falta fecha y lugar.",
+    "media": { "photos": [], "documents": [] }
+  },
+  {
+    "id": "norma-troncoso-henriquez",
+    "fullName": "Norma Eliana Troncoso Henríquez",
+    "birth": null,
+    "death": null,
+    "notes": "Madre de Miguel Neftalí Herrera Troncoso. Falta fecha y lugar.",
+    "media": { "photos": [], "documents": [] }
+  }
+]
